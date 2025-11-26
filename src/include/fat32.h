@@ -2,6 +2,7 @@
 #define __FAT32_H
 #include <stdlib.h>
 #include <stdio.h>
+#include "defs.h"
 
 #define TF_MAX_PATH 256
 #define TF_FILE_HANDLES 4

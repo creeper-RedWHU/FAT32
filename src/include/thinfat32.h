@@ -87,18 +87,18 @@ typedef struct struct_tfinfo {
 /////////////////////////////////////////////////////////////////////////////////
 
 typedef struct struct_TFFILE {
-    uint32_t parentStartCluster;
-    uint32_t startCluster;
-    uint32_t currentClusterIdx;
-    uint32_t currentCluster;
-    short currentSector;
-    short currentByte;
-    uint32_t pos;
-    uint8_t flags;
-    uint8_t attributes;
-    uint8_t mode;
-    uint32_t size;
-    uint8_t filename[TF_MAX_PATH];
+    uint32_t parentStartCluster;          // 父目录簇号
+    uint32_t startCluster;                // 文件起始簇号
+    uint32_t currentClusterIdx;           // 当前簇索引（逻辑位置）
+    uint32_t currentCluster;              // 当前物理簇号（动态，读写定位用）
+    int      currentSector;               // 当前扇区号 (在当前簇内)
+    int      currentByte;                 // 当前扇区内字节偏移
+    uint32_t pos;                         // 文件总偏移量（类似ftell/fseek）
+    uint8_t  flags;                       // 文件状态位（如OPEN、DIRTY等）
+    uint8_t  attributes;                  // FAT32属性（只读、隐藏、目录等）
+    uint8_t  mode;                        // 打开模式（读/写/追加等）
+    uint32_t size;                        // 文件总字节数
+    uint8_t  filename[TF_MAX_PATH];       // 文件路径或名字（最高支持256字节，含长名）
 } TFFile;
 
 
